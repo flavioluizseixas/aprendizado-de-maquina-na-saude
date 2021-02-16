@@ -1,0 +1,41 @@
+\section{Variáveis aleatórias}
+
+As variáveis aleatórias são de dois tipos. As discretas associadas a alguma contagem, e as contínuas que envolvem medições ou mesmo razões. A distinção é necessária para que as regras do cálculo das probabilidades sejam corretamente aplicadas a cada caso. Segue um resumo das propriedades e distinções dos principais modelos de probabilidades para variáveis aleatórias discretas e contínuas.
+
+\subsection{Variáveis Aleatórias Discretas}
+
+Uma variável aleatória discreta $X$ é uma função que associa as proposições de interesse a um conjunto enumerável (ou categórico, que pode ser nominal ou ordinal), não necessariamente finito, de valores. Se, por exemplo, $X$ caracteriza o número de amostras de sangue avaliadas antes do aparecimento de uma amostra que contém um vírus de interesse, então os possíveis valores para $X$ que caracterizam um conjunto infinito 0, 1, 2, ... já que náo existe um limite superior para delimitá-lo.
+
+De modo geral, o valor $Pr(X = x_j | H)$ denota a massa de probabilidade no ponto $x_j$. Sobre o conjunto de todos os pontos plausíveis, ou seja, pontos com massa de probabilidade maior que zero, a Lei da adição garante que:
+
+\begin{equation}
+    \sum_{j}{Pr(X = x_j|H)} = 1
+\end{equation}
+
+A média ou valor esperado de $X$, $E(X)$, e a sua variância, $V(X)$, são definidas por:
+
+\begin{equation}
+\begin{split}
+    E(X) = \sum_{j}{x_j Pr(X = x_j|H)} \\
+    V(X) = \sum_{j}{(x_j - E(X))^2 Pr(X = x_j|H)}
+\end{split}
+\end{equation}
+
+\subsection{Variáveis Aleatórias Contínuas}
+
+Quando os possíveis valores de $X$ foram um subconjunto que compreende pelo menos um intervalo da escala de números reais, a variáveis aleatória é denominada contínua. Variáveis aleatórias contínuas são caracterizadas pela sua função distribuição cumulativa $F(x)$ que é definida para todo o número real $x \in (-\infty \infty)$.
+
+\begin{equation}
+    F(x) = Pr(X \leq x | H)
+\end{equation}
+
+A função densidade de probabilidade é definida por $f(x) = \frac{F(x)}{dx}$. A integração da densidade de probabilidade sobre os números reais é igual a 1, ou seja: $\int_{-\infty}^{\infty}{f(x) \cdot dx} - 1$.
+
+A média e a variância de $X$ também são expressos em integrais:
+
+\begin{equation}
+\begin{split}
+    E(X) = \int{x \cdot f(x) dx} \\
+    V(X) = \int{(x - E(X))^2 \cdot f(x) dx}
+\end{split}
+\end{equation}

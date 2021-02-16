@@ -1,0 +1,65 @@
+\section{Distribuições de Probabilidade}
+
+Denomina-se de distribuição de probabilidade de alguma variável aleatória a regra geral que define a função de massa de probabilidade (variável discreta) ou de densidade de probabilidade (variável contínua) para a variável de interesse.
+
+\subsection{Distribuições Discretas}
+
+\subsubsection{Distribuição Uniforme Discreta Ud(a,b)}
+
+\begin{equation}
+    p(x) = \frac{1}{b-a+1}
+\end{equation}
+
+\subsubsection{Distribuição Binomial Bin(n,$\theta$)}
+
+\begin{equation}
+    p(x) = \begin{pmatrix} n\\x \end{pmatrix} \cdot \theta^x \cdot (1-\theta)^{n-x}
+\end{equation}
+
+\subsubsection{Distribuição Hipergeométrica Hip(M, N, n)}
+
+\begin{equation}
+    p(x) = \frac{\begin{pmatrix} M\\x \end{pmatrix} \cdot \begin{pmatrix} N-M\\n-x \end{pmatrix}}{\begin{pmatrix} N\\n \end{pmatrix}}
+\end{equation}
+
+\subsubsection{Distribuição de Poisson Poi($\mu$)}
+
+\begin{equation}
+    p(x) = \frac{e^\mu \mu^x}{x!}
+\end{equation}
+
+\subsubsection{Distribuição Binomial Negativa BinN(a,$\theta$)}
+
+\begin{equation}
+    p(x) = \frac{(a + x - 1)!}{x! (a-1)!} \cdot \theta^a(1-\theta)^x
+\end{equation}
+
+\subsection{Distribuição Contínua}
+
+\subsubsection{Distribuição Uniforme U(c,d)}
+
+\begin{equation}
+    p(x) = \frac{1}{d-c}
+\end{equation}
+
+\subsubsection{Distribuição Beta($\alpha$, $\beta$)}
+
+\begin{equation}
+    p(x) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha) \Gamma(\beta)} \cdot x^{\alpha+1} (1-x)^{\beta-1}
+\end{equation}
+
+\subsubsection{Distribuição Beta Gerenalizada}
+
+\subsubsection{Distribuição Exponencial}
+
+\subsubsection{Distribuição Gama}
+
+\subsubsection{Distribuição Gama Inversa}
+
+\subsubsection{Distribuição Normal}
+
+\subsubsection{Distribuição Student}
+
+\subsection{Exemplo de códigos gerados no R}
+
+\lstinputlisting[language=Octave]{code/graficos.r}

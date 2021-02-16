@@ -1,0 +1,29 @@
+\section{As Regras de Probabilidade}
+
+A probabilidade será um número real e função de dois argumentos: o evento incerto $E$ e a premissa $H$. Utilizaremos o símbolo $Pr(E|H)$ lido como probabilidade de $E$ dado que $H$ é fato, ou a probabilidade de $E$ condicionada ao fato $H$.
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!75!black,title=A Lei da convexidade]
+    A probabilidade de um evento qualquer $E$, condicionado a $H$ é um número real no intervalo $[0,1]$
+    \begin{equation}
+        0<Pr(E|H)<1
+    \end{equation}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!75!black,title=A Lei da adição]
+    Se $E_1$ e $E_2$ são eventos exclusivos sob $H$, então a probabilidade da união lógica de $E_1 + E_2$ é igual a soma aritmética das suas probabilidades individuais condicionadas a $H$.
+    \begin{equation}
+        Pr(E_1 + E_2 | H) = Pr(E_1|H) + Pr(E_2|H)
+    \end{equation}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!75!black,title=A Lei do produto]
+    Se $E_1$ e $E_2$ são eventos quaisquer então a probabilidade do produto lógico $E_1 E_2$ condicionado a $H$ é o produto da probabilidade de $E_1$ condicionado a $H$ multiplicado pela probabilidade de $E_2$ condicionado a $E_1 H$
+    \begin{equation}
+        Pr(E_1 E_2 | H) = Pr(E_1|H) \cdot Pr(E_2|E_1 H)
+    \end{equation}
+\end{tcolorbox}
+
+Nos casos em que estamos tratando de eventos independentes, a lei do produto pode ser reescrita como:
+\begin{equation}
+    Pr(E_1 E_2 | H) = Pr(E_1|H) \cdot Pr(E_2|H)
+\end{equation}
