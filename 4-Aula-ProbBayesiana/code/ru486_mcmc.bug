@@ -1,0 +1,4 @@
+model {
+    teta ~ dunif(0,1)
+    x ~ dbin(teta,n)
+}

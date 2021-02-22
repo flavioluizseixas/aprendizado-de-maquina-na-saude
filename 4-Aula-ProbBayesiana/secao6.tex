@@ -6,3 +6,96 @@ A distribuição posterior é a forma mais completa de expressar o estado do con
 
 Além disso, o processo é dinâmico. A distribuição posterior de hoje pode se transformar na priori em estudos futuros, caracterizando o elemento cumulativo de aquisição de informações.
 
+A distribuição de probabilidade posterior pode ser obtido com o cálculo direto do produto $Pr(\theta) \cdot Pr(X | \theta)$ para cada valor de $\theta$. Ou, pode ser calculada usando famílias conjugadas de distribuições de probabilidade, ou recorrendo a procedimentos de simulação estocástica.
+
+\subsection{Probabilidades posteriores para famílias conjugadas de distribuições}
+
+Seja $\mathcal{F}$ uma família de distribuições para a verossimilhança $Pr(x | \theta)$ e $\mathcal{P}$ uma família de distribuição para a priori $Pr(\theta)$. Dizemos que $\mathcal{F}$ e $\mathcal{P}$ são famílias conjugadas de distribuições se a distribuição posterior $Pr(\theta|X)$ também é um membro de $\mathcal{P}$
+
+Ver \url{https://en.wikipedia.org/wiki/Conjugate_prior}
+
+\subsection{Probabilidades posteriores e simulação estocástica}
+
+Embora as famílias conjugadas de distribuições simplifiquem consideravelmente as análises, elas por outro lado restringem as possibilidades de aplica;óes ao induzirem a escolha de um modelo muito mais pela sua conveniência matemática que pelo seu realismo. Em muitas situações de interesse, as famílias conjugadas de distribuições não se aplicam. Portanto, para ampliar a abrangência do uso da estatística bayesiana, precisamos usar métodos que tenham aplicabilidade irrestrita.
+
+O princípio básico que fundamenta a relação entre simulação estocástica e distribuições posteriores está na dualidade entre a formulação algébrica de uma distribuição de probabilidade $Pr(\theta)$ e uma amostra simulada ${\theta_1,\theta_2,\theta_3, ...\theta_n}$ obtida dessa mesma distribuição.
+
+Na análise estatística de distribuições posteriores quase sempre é necessário calcular quantidades $J_H(x)$ que se traduzem na razão entre integrais com a seguinte forma:
+
+\begin{equation}
+    J_H(x) = \int{H(\theta)\cdot Pr(\theta|x) d\theta} = \frac{\int{H(\theta)\cdot Pr(x|\theta) d\theta}}{p(x)}
+\end{equation}
+
+Os métodos utilizados para resolver esses problemas complexos estão fundamentados no princípio da Integração de Monte Carlo. Seja ${\theta_1, ...,\theta_n}$ uma amostra de $n$ variáveis aleatórias independentes e identicamente distribuídas com densidade $Pr(\theta|x)$. Então, para $n$ suficientemente grande, segue pela Lei dos Grandes Números que:
+
+\begin{equation}
+    \int{H(\theta)\cdot Pr(\theta|x) d\theta} \approx \frac{1}{n} \sum_{j=1}^{n}{H(\theta_j)}
+\end{equation}
+
+A Lei dos Grandes Números sugere que para melhorar a aproximação, basta aumentar o tamanho da amostra. Vale lembrar que, para utilizar a integração de Monte Carlo é necessário dispor da amostra ${\theta_1, ...\theta_n}$ da distribuição posterior $Pr(\theta|x)$. Há no entanto maneiras de gerar amostras da distribuição posterior de forma indireta:
+
+\begin{itemize}
+    \item Método de re-amostragem por importância (Sampling Importance Resampling - SIR).
+    \item Método com Cadeias de Markov (Markov Chain Monte Carlo - MCMC).
+\end{itemize}
+
+\subsection{Re-amostragem por Importância}
+
+Na impossibilidade de amostrar diretamente da distribuição posterior, a amostragem por importância usa outra densidade de probabilidade $g(\cdot)$ que seja semelhante a $Pr(\theta|x)$.
+
+O peso é calculado a partir da razão:
+
+\begin{equation}
+    w(\theta) = \frac{Pr(\theta|x)}{g(\theta)} = \frac{Pr(x|\theta)\cdot Pr(\theta)}{g(\theta)}
+\end{equation}
+
+A esperança posterior de $H$:
+\begin{equation}
+\begin{split}
+    E^p[H] &= \frac{\int{H(\theta)\cdot Pr(\theta | x) d\theta}}{\int{Pr(\theta | x) d\theta}} = \frac{\int{H(\theta)\cdot w(\theta) g(\theta) d\theta}}{\int{w(\theta) g(\theta) d\theta}} \\
+    E^p[H] &= \frac{E^g[H_w]}{E^g[w]}
+\end{split}
+\end{equation}
+
+Pesos normalizados:
+\begin{equation}
+\begin{split}
+    K = \sum_{i=1}^{n}{w(\theta_i)} \\
+    w_i = \frac{w(\theta_i)}{K}
+\end{split}
+\end{equation}
+
+Integração de Monte Carlo:
+\begin{equation}
+    E^p[H] \approx \sum_{i=1}^{n}{H(\theta_i) w_i}
+\end{equation}
+
+Propriedades de interesse de $g(\cdot)$:
+
+\begin{itemize}
+    \item propiciar que seja facilmente gerada uma amostra ${\theta_1,...,\theta_n}$ de valores independentes;
+    \item ter caudas mais pesadas que as caudas de $Pr(\theta|x)$;
+    \item ter forma semelhante a $Pr(\theta|x)$ evitando esforço de amostragem em regiões pouco plausíveis de $\theta$.
+\end{itemize}
+
+A entropia relativa à uniformidade é uma medida que utiliza a dispersão dos pesos para descrever o grau de proximidade entre as distribuições:
+\begin{equation}
+    ERU = -\frac{\sum{w_i log(w_i)}}{log(n)}
+\end{equation}
+
+O valor máximo de $ERU$ é 1. A medida que a entropia entre os $w_i$ aumenta $ERU < 1$. Para as distribuições unidimensionais, recomenda-se $ERU > 0,9$ (nos casos multidimensionais, valores mais baixos são aceitáveis).
+
+\subsection{Monte Carlo com Cadeia de Makov (MCMC)}
+
+O Monte Carlo com Cadeias de Markov foi formalizado por meio do artigo intitulado Monte Carlo Method em 1949. Pode ser descrito como método de simulação estatística de números aleatórios para desenvolver simulações.
+
+As etapas para realizar o processo de Monte Carlo:
+
+\begin{enumerate}[label=\alph*)]
+\item Modelar o problema definindo uma FDP para representar o comportamento de cada uma das suas incertezas;
+\item Gerar valores pseudoaleatórios aderentes à FDP de cada incerteza do problema;
+\item Calcular o resultado determinístico substituindo as incertezas pelos valores gerados obtendo, assim, uma observação do problema;
+\item Repetir os passos b) e c) até se obter uma amostra com o tamanho desejado de realizações;
+\item Agregar e manipular os resultados da amostra de forma a obter uma estimativa da solução do problema.
+\end{enumerate}
+
