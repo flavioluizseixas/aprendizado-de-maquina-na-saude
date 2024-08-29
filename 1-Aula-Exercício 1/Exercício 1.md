@@ -1,10 +1,3 @@
----
-title: "Interpretando os resultados"
-output: html_document
-date: "2024.2"
----
-
-
 
 ## Interpretação dos Coeficientes do GLM
 
