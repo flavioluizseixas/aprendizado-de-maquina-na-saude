@@ -1,0 +1,144 @@
+---
+title: "Interpretando os resultados"
+output: html_document
+date: "2024.2"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Interpretação dos Coeficientes do GLM
+
+Os coeficientes obtidos representam a mudança no logaritmo da razão de chances (log-odds) da ocorrência de diabetes para cada unidade de aumento nas variáveis preditoras.
+
+-	Intercept: O intercepto representa o log-odds da ocorrência de diabetes quando todas as variáveis independentes são iguais a zero.
+- glucose: Cada unidade adicional no nível de glicose aumenta o log-odds de ter diabetes em r round(coef(model)["glucose"], 4). O valor-p associado indica que essa variável é altamente significativa.
+- bmi: Cada unidade adicional no IMC aumenta o log-odds de ter diabetes em r round(coef(model)["bmi"], 4). Novamente, essa variável é estatisticamente significativa.
+- age: Cada ano adicional de idade aumenta o log-odds de ter diabetes em r round(coef(model)["age"], 4).
+
+## Odds Ratio
+
+Para facilitar a interpretação, podemos converter os coeficientes em razão de chances (odds ratio).
+
+```r
+# Calculando o Odds Ratio
+exp(coef(model))
+```
+
+O Odds Ratio nos diz como as chances de ter diabetes mudam para cada unidade de aumento em cada variável:
+
+- glucose: Para cada unidade de aumento em glucose, as chances de ter diabetes aumentam em `round(exp(coef(model)["glucose"]), 2)` vezes.
+- bmi: Para cada unidade de aumento em bmi, as chances de ter diabetes aumentam em `round(exp(coef(model)["bmi"]), 2)` vezes.
+- age: Para cada ano adicional de idade, as chances de ter diabetes aumentam em `round(exp(coef(model)["age"]), 2)` vezes.
+
+## Interpretação do AIC
+
+O Akaike Information Criterion (AIC) é uma medida usada para comparar modelos estatísticos, incluindo o modelo de regressão logística ajustado com glm. No contexto do GLM, o AIC é útil para selecionar o modelo que melhor se ajusta aos dados com base em um equilíbrio entre a qualidade do ajuste e a simplicidade do modelo.
+
+### Interpretação do AIC:
+
+1.	Definição do AIC:
+- O AIC é definido como:
+
+$$
+\text{AIC} = 2k - 2\ln(L)
+$$
+Onde:
+
+- k é o número de parâmetros no modelo (incluindo o interceptação).
+- L é a máxima verossimilhança do modelo ajustado.
+
+2.	Comparação de Modelos:
+- O AIC sozinho não fornece muita informação, mas é extremamente útil para comparar dois ou mais modelos. Quando comparando modelos, o modelo com o menor AIC é preferido porque indica um melhor equilíbrio entre o ajuste ao dado e a complexidade do modelo.
+
+3. Equilíbrio Entre Ajuste e Complexidade:
+- O AIC penaliza modelos mais complexos (com mais parâmetros). Isso significa que, mesmo que um modelo mais complexo se ajuste melhor aos dados, o AIC pode preferir um modelo mais simples se a melhoria no ajuste não for suficiente para justificar a complexidade adicional.
+- Modelo com menor AIC: Indica que o modelo tem um bom ajuste aos dados sem ser excessivamente complexo.
+
+4.	Interpretação Prática:
+- Se você tem vários modelos que explicam os mesmos dados, o AIC ajuda a identificar o modelo que oferece o melhor compromisso entre simplicidade e capacidade de explicar os dados.
+- Diferença no AIC:
+  - Se a diferença no AIC entre dois modelos é grande (geralmente maior que 10), o modelo com o menor AIC é significativamente melhor.
+  - Se a diferença no AIC é pequena (menos que 2), os modelos podem ser considerados praticamente equivalentes em termos de qualidade.
+  
+  
+## Como o cor.test Funciona
+
+A função cor.test em R realiza o teste de correlação e fornece:
+
+1.	Coeficiente de Correlação de Pearson: Mede a força e a direção da relação linear entre duas variáveis. O valor varia de -1 a 1:
+
+-	1: Correlação positiva perfeita.
+- 0: Nenhuma correlação.
+- -1: Correlação negativa perfeita.
+
+2.	Valor-P (p-value): Avalia a significância estatística da correlação observada. Indica a probabilidade de observar uma correlação tão extrema quanto a observada, assumindo que a verdadeira correlação seja zero.
+
+### Exemplo
+
+```r
+# Teste de correlação entre glicose e idade
+cor_test_result <- cor.test(data$glucose, data$age)
+
+# Exibindo o resultado
+cor_test_result
+
+Pearson's product-moment correlation
+
+data:  data$glucose and data$age
+t = 12.34, df = 98, p-value < 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+  0.65  0.85
+sample estimates:
+      cor 
+0.76 
+```
+
+1.	Coeficiente de Correlação (cor):
+
+- O valor obtido foi  r = 0.76 . Isso indica uma correlação positiva forte entre glicose e idade. Em outras palavras, conforme a idade aumenta, os níveis de glicose também tendem a aumentar.
+
+2.	Valor-P (p-value):
+- O valor-p é muito pequeno (menor que  $2.2 \times 10^{-16}$ ). Isso sugere que a correlação observada é estatisticamente significativa. Em outras palavras, há evidências suficientes para rejeitar a hipótese nula de que não há correlação entre glicose e idade.
+
+3.	Intervalo de Confiança (95%):
+-	O intervalo de confiança para o coeficiente de correlação é de  [0.65, 0.85] . Isso significa que, com 95% de confiança, a verdadeira correlação entre glicose e idade está dentro desse intervalo. O intervalo não inclui zero, reforçando a significância da correlação.
+
+
+## ChiSquare
+
+O teste $\chi^2$ (qui-quadrado) é utilizado para verificar se existe uma associação significativa entre duas variáveis categóricas. O comando chisq.test() em R realiza o teste $\chi^2$ e fornece informações sobre a independência entre as variáveis.
+
+```r
+# Teste qui-quadrado
+chisq_test_result <- chisq.test(table_glucose_diabetes)
+
+# Exibindo o resultado
+chisq_test_result
+
+Pearson's Chi-squared test
+
+data:  table_glucose_diabetes
+X-squared = 15.34, df = 3, p-value = 0.0014
+````
+Aqui está como interpretar cada parte do resultado:
+
+1.	Estatística do Teste (X^2):
+
+- X-squared = 15.34: Esta é a estatística do teste $\chi^2$. Quanto maior o valor, maior a discrepância entre as frequências observadas e esperadas, sugerindo uma associação mais forte entre as variáveis.
+	
+2.	Graus de Liberdade (df):
+-	df = 3: Os graus de liberdade são calculados com base nas dimensões da tabela de contingência. No caso de uma tabela $m \times n$, os graus de liberdade são$(m-1) \times (n-1)$. Neste exemplo, a tabela possui 4 células independentes para a comparação.
+
+3.	Valor-P (p-value):
+-	p-value = 0.0014: O valor-p indica a probabilidade de observar uma estatística de teste tão extrema quanto a observada, assumindo que as variáveis são independentes. Um valor-p pequeno (geralmente menor que 0.05) sugere que há evidências suficientes para rejeitar a hipótese nula de independência.
+
+### Interpretação Prática:
+
+-	Se o valor-p for menor que 0.05: Existe uma associação significativa entre as variáveis. No exemplo, com um valor-p de 0.0014, podemos concluir que há uma associação estatisticamente significativa entre os níveis de glicose e a presença de diabetes. Isso sugere que a distribuição das variáveis não é independente e que níveis de glicose podem estar associados com a presença de diabetes.
+
+-	Se o valor-p for maior que 0.05: Não há evidências suficientes para rejeitar a hipótese nula de independência. Isso indicaria que não há uma associação significativa entre as variáveis.
+
+
