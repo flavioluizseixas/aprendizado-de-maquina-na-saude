@@ -1,12 +1,12 @@
 
 ## Exercício: Análise de Fatores de Risco para Doença Cardíaca Usando o Heart Disease Dataset
 
-## Contexto:
+## Contexto
 
 Neste exercício, você irá trabalhar com um conjunto de dados de saúde que contém informações detalhadas sobre fatores de risco para doenças cardíacas. O dataset inclui variáveis como idade, sexo, tipo de dor no peito, pressão arterial em repouso, colesterol sérico, e outras medições clínicas. Seu objetivo é realizar uma análise exploratória e desenvolver um modelo preditivo para identificar a presença de doença cardíaca com base nesses fatores.
 
 
-## Dataset:
+## Dataset
 
 O dataset inclui as seguintes variáveis:
 
@@ -54,3 +54,8 @@ O dataset inclui as seguintes variáveis:
 7.	Conclusão
 
 - Baseado na análise, conclua quais fatores de risco são mais relevantes para a previsão de doença cardíaca e como esses insights podem ser utilizados em prática clínica ou em futuros estudos.
+
+## Link da base
+
+`https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset?resource=download`
+
