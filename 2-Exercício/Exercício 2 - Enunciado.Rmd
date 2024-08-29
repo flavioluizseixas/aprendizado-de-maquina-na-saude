@@ -55,7 +55,7 @@ O dataset inclui as seguintes variáveis:
 
 - Baseado na análise, conclua quais fatores de risco são mais relevantes para a previsão de doença cardíaca e como esses insights podem ser utilizados em prática clínica ou em futuros estudos.
 
-## Link da base
+## Download da base
 
-`https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset?resource=download`
+[link](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset?resource=download)
 
