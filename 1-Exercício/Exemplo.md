@@ -1,10 +1,7 @@
 ---
 title: "R Notebook"
 output: html_notebook
-editor_options: 
-  chunk_output_type: inline
 ---
-
 
 # Exercício 1
 
@@ -130,37 +127,37 @@ for (column in colnames(data)) {
 }
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
 
 ```
 ## Warning: Removed 5 rows containing non-finite outside the scale range (`stat_bin()`).
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-2.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-2.png)
 
 ```
 ## Warning: Removed 35 rows containing non-finite outside the scale range (`stat_bin()`).
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-3.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-3.png)
 
 ```
 ## Warning: Removed 227 rows containing non-finite outside the scale range (`stat_bin()`).
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-4.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-4.png)
 
 ```
 ## Warning: Removed 374 rows containing non-finite outside the scale range (`stat_bin()`).
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-5.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-5.png)
 
 ```
 ## Warning: Removed 11 rows containing non-finite outside the scale range (`stat_bin()`).
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-6.png)![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-7.png)![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-8.png)![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-9.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-6.png)![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-7.png)![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-8.png)![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-9.png)
 
 ## Gráfico de dispersão
 
@@ -173,7 +170,7 @@ ggpairs(data,
         theme_minimal()
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
 
 # Modelo Explicativo
 
