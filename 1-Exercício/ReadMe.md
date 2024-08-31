@@ -1,5 +1,7 @@
 # Exercicio 1
 
-- [Exemplo](Exemplo.md)
+- [Exemplo em R](Exemplo.md)
+
+- [Exemplo em Python](ExemploPython.md)
 
 - [Exercício](Exercício1.md)

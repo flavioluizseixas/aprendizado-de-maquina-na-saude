@@ -4,6 +4,6 @@
 
 ## 1- Análise de dados de saúde com análise exploratória 
 
-- Exemplo [link(http://www)]
+- [Exemplo](1-Exercício/Exemplo.md)
 
-- Exercício [link(http://www)]
+- [Exercício](1-Exercício/Exercício1.md)
