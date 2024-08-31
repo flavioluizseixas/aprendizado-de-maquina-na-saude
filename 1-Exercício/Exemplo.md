@@ -20,7 +20,7 @@ Visualização dos Dados: Crie gráficos para visualizar a distribuição dos da
 
 ## Exemplo
 
-## Carregando os pacotes
+## 1- Carregando os pacotes
 
 
 ``` r
@@ -31,7 +31,7 @@ library(RCurl)
 library(GGally)
 library(dplyr)
 ```
-## Leitura do dataset.
+## 2- Leitura do dataset
 
 Exemplo: Pima Indians Diabetes dataset, obtido pelo [Kaggle](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database). Pode ser substituído por outro dataset relacionado à saúde.
 
@@ -65,7 +65,7 @@ head(data)
 ## 6        0
 ```
 
-## Limpeza dos dados
+## 3- Limpeza dos dados
 
 
 ``` r
@@ -74,7 +74,7 @@ data <- data %>%
                  ~ ifelse(. == 0, NA, .)))
 ```
 
-## Análise Descritiva
+## 4- Análise Descritiva
 
 
 ``` r
@@ -100,7 +100,7 @@ summary(data)
 ##  NA's   :11
 ```
 
-## Gerar o histograma com ggplot2 e facet_wrap
+## 5- Gerar o histograma com ggplot2 e facet_wrap
 
 
 ``` r
@@ -155,7 +155,7 @@ for (column in colnames(data)) {
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-6.png)![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-7.png)![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-8.png)![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-9.png)
 
-## Gráfico de dispersão
+## 6- Gráfico de dispersão
 
 
 ``` r
@@ -170,7 +170,7 @@ ggpairs(data,
 
 # Modelo Explicativo
 
-## Uso da regressão logística
+## 7- Uso da regressão logística
 
 ``` r
 model <- glm(diabetes ~ glucose + bmi + age, data=data, family=binomial)
@@ -222,7 +222,7 @@ Os coeficientes obtidos representam a mudança no logaritmo da razão de chances
 - age: Cada ano adicional de idade aumenta o log-odds de ter diabetes em `round(coef(model)["age"], 4)`.
 
 
-## Teste de correlação entre glicose e idade
+## 8- Teste de correlação entre glicose e idade
 
 
 ``` r
@@ -252,7 +252,7 @@ A função cor.test em R realiza o teste de correlação e fornece:
 
 2.	Valor-P (p-value): Avalia a significância estatística da correlação observada.
 
-## Teste de associação entre glicose e presença de diabetes usando $\chi^2$
+## 9- Teste de associação entre glicose e presença de diabetes usando $\chi^2$
 
 
 ``` r
