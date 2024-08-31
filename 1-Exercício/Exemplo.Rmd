@@ -1,9 +1,5 @@
----
-title: "R Notebook"
-output: html_notebook
----
 
-# Exercício 1
+# Exemplo
 
 ## Análise de Dados de Saúde com Modelos Descritivos e Explicativos
 
