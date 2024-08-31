@@ -1,5 +1,5 @@
 
-## Exercício 2
+## Exercício 1
 
 ## Análise de Fatores de Risco para Doença Cardíaca Usando o Heart Disease Dataset
 
