@@ -6,9 +6,9 @@
 
 - [Exemplo em R com interpretação](1-Exercício/Exemplo.md)
 
-- [Exemplo em Python](1-Exercício/Exemplo.ipynb)
+- [Exemplo em Python](1-Exercício/ExemploPython.ipynb)
 
-- [Explicação visual sobre regressão logística](1-Exercício/Explicação-Regressão-Logísticaipynb)
+- [Explicação visual sobre regressão logística](1-Exercício/Explicação-Regressão-Logística.ipynb)
 
 - [Exercício](1-Exercício/Exercício1.md)
 
