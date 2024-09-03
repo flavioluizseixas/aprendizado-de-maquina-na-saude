@@ -8,4 +8,7 @@
 
 - [Exemplo em Python](1-Exercício/Exemplo.ipynb)
 
+- [Explicação visual sobre regressão logística](1-Exercício/Explicação-Regressão-Logísticaipynb)
+
 - [Exercício](1-Exercício/Exercício1.md)
+
