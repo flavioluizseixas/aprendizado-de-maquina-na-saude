@@ -1,9 +1,11 @@
 
-# Exercício 1
+# Tarefa 1
 
 ## Análise de Fatores de Risco para Doença Cardíaca Usando o Heart Disease Dataset
 
-Neste exercício, você irá trabalhar com um conjunto de dados de saúde que contém informações detalhadas sobre fatores de risco para doenças cardíacas. O dataset inclui variáveis como idade, sexo, tipo de dor no peito, pressão arterial em repouso, colesterol sérico, e outras medições clínicas. Seu objetivo é realizar uma análise exploratória e desenvolver um modelo preditivo para identificar a presença de doença cardíaca com base nesses fatores.
+Neste exercício, você irá trabalhar com um conjunto de dados de saúde que contém informações detalhadas sobre fatores de risco para doenças cardíacas. O dataset inclui variáveis como idade, sexo, tipo de dor no peito, pressão arterial em repouso, colesterol sérico, e outras medições clínicas.
+
+**Objetivo:** realizar uma análise exploratória e desenvolver um modelo preditivo para identificar a presença de doença cardíaca com base nesses fatores.
 
 
 ## Dataset
