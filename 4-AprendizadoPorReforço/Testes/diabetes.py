@@ -59,5 +59,6 @@ state = env.reset()
 for _ in range(10):
     action = env.action_space.sample()  # Selecionar uma ação aleatória
     next_state, reward, done, _ = env.step(action)
+
     if done:
         break
