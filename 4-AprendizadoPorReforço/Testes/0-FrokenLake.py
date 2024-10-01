@@ -32,6 +32,8 @@ while not done:
     # Executar a ação
     state, reward, done, truncated, info = environment.step(action)
 
+    print(reward)
+    
     # Renderizar o ambiente após a ação
     environment.render()
 

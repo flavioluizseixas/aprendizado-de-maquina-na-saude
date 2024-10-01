@@ -131,5 +131,9 @@ def SARSA(env, lr=0.01, num_episodes=10000, eps=0.3, gamma=0.95, eps_decay=0.000
 
 if __name__ == '__main__':
     env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=True)
-    Q_qlearning = Q_learning(env, lr=.1, num_episodes=5000, eps=0.2, gamma=0.95, eps_decay=0.001)
+    
+    # Definir uma semente para a geração de números aleatórios
+    np.random.seed(42)
+
+    Q_qlearning = Q_learning(env, lr=.1, num_episodes=5000, eps=1, gamma=0.95, eps_decay=0.001)
     #Q_sarsa = SARSA(env, lr=.1, num_episodes=5000, eps=0.2, gamma=0.95, eps_decay=0.001)
