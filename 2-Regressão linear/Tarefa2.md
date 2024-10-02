@@ -24,8 +24,8 @@ Vamos utilizar as seguintes tabelas do NHANES 2015-2016:
   - [Link para a tabela](https://wwwn.cdc.gov/Nchs/Nhanes/2015-2016/BPX_I.htm)
 
 - **Laboratory Data - Glucose:** Contém dados sobre medições de glicose em jejum.
-  - **Atributo de interesse:** BPXSY1 (Pressão Arterial Sistólica - 1ª Medição)
-  - [Link para a tabela](https://wwwn.cdc.gov/Nchs/Nhanes/2015-2016/BPX_I.htm)
+  - **Atributo de interesse:** LBXGLU (Glicose)
+  - [Link para a tabela](https://wwwn.cdc.gov/Nchs/Nhanes/2015-2016/GLU_I.htm)
 
 
 Os dados estão disponíveis em formato XPT no seguinte link:
