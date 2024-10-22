@@ -141,6 +141,22 @@ def train_double_dqn(env, num_episodes=500):
 
     print("Treinamento Concluído!")
 
+    # Exibe a Q-table após o treinamento
+    display_q_table(policy_net, n_states, n_actions)
+
+
+# Função para exibir a "Q-table"
+def display_q_table(policy_net, n_states, n_actions):
+    q_table = np.zeros((n_states, n_actions))  # Cria uma tabela de Q com zeros
+    for state in range(n_states):
+        state_tensor = torch.FloatTensor([one_hot_encode(state, n_states)])  # Codifica o estado em one-hot
+        with torch.no_grad():
+            q_values = policy_net(state_tensor)  # Obtém os valores de Q para o estado atual
+        q_table[state] = q_values.numpy()  # Armazena os valores de Q na tabela
+    print("\nQ-Table (valores de Q estimados):")
+    print(q_table)
+
+
 if __name__ == '__main__':
     env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=True)
     train_double_dqn(env)

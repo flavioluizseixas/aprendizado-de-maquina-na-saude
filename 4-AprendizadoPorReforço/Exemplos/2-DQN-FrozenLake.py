@@ -116,6 +116,17 @@ def dqn(env, state_size, action_size, lr=0.001, num_episodes=1000, gamma=0.99, e
 
     return qnetwork_local
 
+
+def display_q_values(qnetwork_local, state_size, action_size):
+    # Gera uma "tabela de Q" baseada nos estados do ambiente
+    print("\nQ-Values for each state-action pair:")
+    for state in range(state_size):
+        state_input = np.identity(state_size)[state:state+1]  # Codificação one-hot do estado
+        state_tensor = torch.FloatTensor(state_input)  # Converte o estado para tensor do PyTorch
+        q_values = qnetwork_local(state_tensor)  # Calcula os Q-valores para esse estado
+        print(f"State {state}: {q_values.detach().numpy()}")
+
+
 if __name__ == '__main__':
     env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=True)
 
@@ -125,4 +136,6 @@ if __name__ == '__main__':
     
     # Rodando o treinamento do DQN
     Q_qlearning = dqn(env, state_size, action_size)
-    print(Q_qlearning)
+
+    # Exibe os valores de Q para todos os estados possíveis
+    display_q_values(Q_qlearning, state_size, action_size)
