@@ -1,0 +1,69 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Instale os pacotes, caso ainda não os tenha
+if (!require("TH.data")) install.packages("TH.data")
+if (!require("survival")) install.packages("survival")
+if (!require("survminer")) install.packages("survminer")
+
+# Carregar os pacotes
+library(TH.data)
+library(survival)
+library(survminer)
+library(ggplot2)
+
+# Carregar o conjunto de dados
+data("GBSG2", package = "TH.data")
+head(GBSG2)
+```
+```{r}
+# Criando o objeto de sobrevivência
+surv_obj <- Surv(time = GBSG2$time, event = GBSG2$cens)
+
+# Ajuste do modelo Kaplan-Meier
+km_fit <- survfit(surv_obj ~ 1)
+
+# Visualização do Kaplan-Meier
+ggsurvplot(km_fit, data = GBSG2, conf.int = TRUE, 
+           title = "Curva de Sobrevivência Kaplan-Meier",
+           xlab = "Tempo (dias)", ylab = "Probabilidade de Sobrevivência")
+```
+
+```{r}
+# Ajuste do modelo Weibull sem decomposição
+wbmod <- survreg(Surv(time, cens) ~ 1, data = GBSG2, dist = "weibull")
+
+# Definir uma sequência de probabilidades de sobrevivência
+surv <- seq(0.99, 0.01, by = -0.01)
+
+# Calcular os tempos preditos para cada nível de probabilidade de sobrevivência
+# Como estamos prevendo apenas uma curva média, precisamos de um único conjunto de predições
+time_pred <- predict(wbmod, type = "quantile", p = 1 - surv, newdata = data.frame(1))
+
+# Criar um data frame para visualização
+surv_wbmod <- data.frame(time = time_pred, survival = surv)
+
+# Plotar a curva de sobrevivência Weibull simplificada
+ggplot(surv_wbmod, aes(x = time, y = survival)) +
+  geom_line(color = "blue") +
+  labs(title = "Curva de Sobrevivência Weibull (Sem Decomposição)",
+       x = "Tempo (dias)", y = "Probabilidade de Sobrevivência") +
+  theme_minimal()
+```
+
+```{r}
+# Ajuste do modelo de Cox sem especificar covariáveis (curva média de sobrevivência)
+cox_fit <- coxph(Surv(time, cens) ~ 1, data = GBSG2)
+
+# Gerar a curva de sobrevivência média
+cox_surv <- survfit(cox_fit)
+
+# Visualizar a curva de sobrevivência usando ggsurvplot
+ggsurvplot(cox_surv, data = GBSG2, 
+           title = "Curva de Sobrevivência do Modelo de Cox",
+           xlab = "Tempo (dias)", ylab = "Probabilidade de Sobrevivência",
+           conf.int = TRUE)
+```

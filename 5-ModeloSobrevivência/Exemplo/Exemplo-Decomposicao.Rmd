@@ -1,0 +1,101 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Instale os pacotes, caso ainda não os tenha
+if (!require("TH.data")) install.packages("TH.data")
+if (!require("survival")) install.packages("survival")
+if (!require("survminer")) install.packages("survminer")
+
+# Carregar os pacotes
+library(TH.data)
+library(survival)
+library(survminer)
+library(ggplot2)
+
+# Carregar o conjunto de dados
+data("GBSG2", package = "TH.data")
+head(GBSG2)
+```
+```{r}
+# Weibull model
+wbmod <- survreg(Surv(time,cens) ~ horTh + tsize, data = GBSG2)
+
+# Imaginary patients
+newdat <- expand.grid(
+  horTh = levels(GBSG2$horTh),
+  tsize = quantile(GBSG2$tsize, probs = c(0.25, 0.5, 0.75)))
+newdat
+
+# Compute survival curves
+surv <- seq(.99, .01, by = -.01)
+t <- predict(wbmod,
+             type = "quantile",
+             p = 1-surv,
+             newdata = newdat)
+
+# How many rows and columns does t have?
+dim(t)
+
+# Use cbind() to combine the information in newdat with t
+surv_wbmod_wide <- cbind(newdat, t)
+
+# Use melt() to bring the data.frame to long format
+surv_wbmod <- melt(surv_wbmod_wide,
+                   id.vars = c("horTh", "tsize"),
+                   variable.name = "surv_id",
+                   value.name = "time")
+
+# Use surv_wbmod$surv_id to add the correct survival probabilities surv
+surv_wbmod$surv <- surv[as.numeric(surv_wbmod$surv_id)]
+
+# Add columns upper, lower, std.err, and strata to the data.frame
+surv_wbmod[, c("upper", "lower", "std.err", "strata")] <- NA
+
+# Take a look at the structure of the object
+str(surv_wbmod)
+
+# Plot the survival curves
+print(ggsurvplot_df(surv_wbmod,
+              surv.geom = geom_line,
+              linetype = "horTh",
+              color = "tsize",
+              title = "Curva de Sobrevivência Weibull",
+              legend.title = NULL))
+```
+
+```{r}
+# Cox model
+cxmod <- coxph(Surv(time, cens) ~ horTh + tsize, data = GBSG2)
+
+# Imaginary patients
+newdat <- expand.grid(
+  horTh = levels(GBSG2$horTh),
+  tsize = quantile(GBSG2$tsize, probs = c(0.25, 0.5, 0.75))
+)
+
+# Compute survival curves
+cxsf <- survfit(cxmod, data = GBSG2, newdata = newdat, conf.type = "none")
+
+# Look at first 6 rows of cxsf$surv and time points
+head(cxsf$surv)
+
+# Compute data.frame needed for plotting
+surv_cxmod0 <- surv_summary(cxsf)
+
+# Get a character vector of patient letters (patient IDs)
+pid <- as.character(surv_cxmod0$strata)
+
+# Multiple of the rows in newdat so that it fits with surv_cxmod0
+m_newdat <- newdat[pid, ]
+
+# Add patient info to data.frame
+surv_cxmod <- cbind(surv_cxmod0, m_newdat)
+head(surv_cxmod)
+
+# Plot
+print(ggsurvplot_df(surv_cxmod, linetype = "horTh", color = "tsize",
+              legend.title = NULL, censor = FALSE))
+```
