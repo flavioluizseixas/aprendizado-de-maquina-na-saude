@@ -1,8 +1,8 @@
 ## diretórios que estão ocultados em um primeiro momento
 #1-Análise Exploratória e Regressão Logística/Solução/
 #2-Regressão linear/Solução/
-3-Clusterização/Solução/
-4-AprendizadoPorReforço/Solução/
+#3-Clusterização/Solução/
+#4-AprendizadoPorReforço/Solução/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
