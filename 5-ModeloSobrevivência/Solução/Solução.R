@@ -72,7 +72,6 @@ cancer$predicted_survival <- predicted_survival
 # Modificar a variável 'sex' para ser um fator com labels descritivos
 cancer$sex <- factor(cancer$sex, levels = c(1, 2), labels = c("Masculino", "Feminino"))
 
-
 # Criar um gráfico de dispersão para visualizar os efeitos do modelo Weibull
 ggplot(cancer, aes(x = age, y = predicted_survival, color = as.factor(sex))) +
   geom_point() +
