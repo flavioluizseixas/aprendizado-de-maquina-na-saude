@@ -19,6 +19,21 @@ library(ggplot2)
 data("GBSG2", package = "TH.data")
 head(GBSG2)
 ```
+Description:
+
+- horTh: hormonal therapy, a factor at two levels no and yes.
+- hormon: numeric version of horTh
+- age of the patients in years.
+- menostat: menopausal status, a factor at two levels pre (premenopausal) and post (postmenopausal).
+- meno: Numeric version of menostat
+- tsize: tumor size (in mm).
+- tgrade: tumor grade, a ordered factor at levels I < II < III.
+- pnodes: number of positive nodes.
+- progrec: progesterone receptor (in fmol).
+- estrec: estrogen receptor (in fmol).
+- time: recurrence free survival time (in days).
+- cens: censoring indicator (0- censored, 1- event).
+
 ```{r}
 # Criando o objeto de sobrevivência
 surv_obj <- Surv(time = GBSG2$time, event = GBSG2$cens)
