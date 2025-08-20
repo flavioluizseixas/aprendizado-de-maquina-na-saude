@@ -21,4 +21,5 @@
 9. Experimento 8 — Visualização com matplotlib
 10. Experimento 9 — Naive Bayes (Classificação)
 11. Experimento 10 — Comparando Modelos (NB, SVM, KNN)
+12. Experimento 11 — Comparando Modelos e usando gridsearch para otimização dos hiperparâmetros
 
