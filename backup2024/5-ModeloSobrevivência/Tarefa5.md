@@ -8,7 +8,7 @@ Este projeto tem como objetivo analisar fatores associados à sobrevivência de 
 ## Metodologia
 1. Coleta e Preparação de Dados
 
-- Carregar o conjunto de dados cancer usando data(cancer, package="survival").
+- Carregar o conjunto de dados cancer usando data(cancer, package="survival"). Este conjunto de dados também está disponivel no endereço https://github.com/flavioluizseixas/aprendizado-de-maquina-na-saude/blob/main/5-ModeloSobreviv%C3%AAncia/data/cancer_data.csv
 - Explorar e preparar os dados, removendo valores ausentes e fazendo uma análise descritiva das variáveis relevantes (tempo de sobrevivência, status de censura, idade, sexo, ingestão calórica diária, entre outros).
 - As seguintes variáveis estão presentes no dataset
   - inst: Institution code
